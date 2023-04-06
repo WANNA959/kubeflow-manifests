@@ -1,9 +1,43 @@
 # Kubeflow Manifests
 
+## Installation
+- ref
+  - workflow: https://blog.csdn.net/yanqianglifei/article/details/128432784
+  - fix permission: https://codeleading.com/article/54636256966/
+
+> install kustomize
+```shell
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+
+cp kustomize /bin/
+kustomize version
+```
+
+> pv
+```shell
+kubectl apply -f kubeflow-storage.yaml
+chmod -R 777 /data/k8s/istio-authservice/
+```
+
+> pull gcr.io to dockerhub
+ref: https://github.com/WANNA959/sync_gcr
+
+> installation
+```shell
+while ! kustomize build example | kubectl apply -f -; do echo "Retrying to apply resources"; sleep 10; done
+```
+
+> kubeflow dashboard
+```shell
+kubectl port-forward --address 0.0.0.0 svc/istio-ingressgateway -n istio-system 8080:80
+
+user@example.com 
+12341234
+```
+
 ## Table of Contents
 
 <!-- toc -->
-
 - [Overview](#overview)
 - [Kubeflow components versions](#kubeflow-components-versions)
 - [Installation](#installation)
